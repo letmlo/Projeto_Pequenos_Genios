@@ -1,6 +1,6 @@
 package question;
 
-public class Question {public abstract class Question {
+public abstract class Question {
     protected String enunciado;
     protected String respostaCorreta;
     protected String categoria;
