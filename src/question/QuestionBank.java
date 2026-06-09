@@ -234,6 +234,56 @@ public class QuestionBank {
                 "O teorema de Fermat ficou sem prova por mais de 350 anos.", true, "Matemática", 3
         ));
 
+        // Complete a Lacuna - Fácil
+        perguntas.add(new FillBlankQuestion(
+                "O ser humano tem ___ sentidos básicos. (escreva o número por extenso)",
+                "cinco", "Cultura Geral", 1
+        ));
+        perguntas.add(new FillBlankQuestion(
+                "A capital da França é ___.",
+                "Paris", "Geografia", 1
+        ));
+        perguntas.add(new FillBlankQuestion(
+                "O ___ é o maior planeta do Sistema Solar.",
+                "Júpiter", "Ciências", 1
+        ));
+        perguntas.add(new FillBlankQuestion(
+                "A ___ é a língua oficial do Brasil.",
+                "Portuguesa", "Cultura Geral", 1
+        ));
+
+        // Complete a Lacuna - Médio
+        perguntas.add(new FillBlankQuestion(
+                "A fórmula química do sal de cozinha é ___.",
+                "NaCl", "Ciências", 2
+        ));
+        perguntas.add(new FillBlankQuestion(
+                "O autor de 'O Cortiço' é ___.",
+                "Aluísio Azevedo", "Literatura", 2
+        ));
+        perguntas.add(new FillBlankQuestion(
+                "O processo pelo qual as plantas produzem seu alimento se chama ___.",
+                "fotossíntese", "Ciências", 2
+        ));
+        perguntas.add(new FillBlankQuestion(
+                "O continente mais frio do planeta é a ___.",
+                "Antártida", "Geografia", 2
+        ));
+
+        // Complete a Lacuna - Difícil
+        perguntas.add(new FillBlankQuestion(
+                "O cientista que formulou as leis do movimento e da gravitação universal foi ___.",
+                "Newton", "Ciências", 3
+        ));
+        perguntas.add(new FillBlankQuestion(
+                "O número de Avogadro é aproximadamente 6,02 x 10 elevado a ___.",
+                "23", "Ciências", 3
+        ));
+        perguntas.add(new FillBlankQuestion(
+                "A obra 'Cem Anos de Solidão' foi escrita por ___.",
+                "Gabriel García Márquez", "Literatura", 3
+        ));
+
         Collections.shuffle(perguntas);
     }
 

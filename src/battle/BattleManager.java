@@ -13,13 +13,18 @@ public class BattleManager {
     private Enemy enemy;
     private QuestionBank banco;
     private int rodadaAtual;
+    private int indice;
     private static final int RODADAS_POR_BATALHA = 5;
 
-    public BattleManager(Player player, Enemy enemy, QuestionBank banco) {
+    public BattleManager(Player player, QuestionBank banco) {
         this.player = player;
-        this.enemy = enemy;
         this.banco = banco;
         this.rodadaAtual = 0;
+        this.indice = 0;
+    }
+
+    public void setOponente(Enemy enemy) {
+        this.enemy = enemy;
     }
 
     public boolean executarBatalha() {
@@ -27,15 +32,16 @@ public class BattleManager {
         System.out.println(enemy.getPersonagem().getDescricao());
 
         List<Question> perguntas = banco.getTodasPerguntas();
-        int indice = 0;
+        int rodadaNestaBatalha = 0;
 
         while (player.getPersonagem().estaVivo()
                 && enemy.getPersonagem().estaVivo()
-                && rodadaAtual < RODADAS_POR_BATALHA
+                && rodadaNestaBatalha < RODADAS_POR_BATALHA
                 && indice < perguntas.size()) {
 
             rodadaAtual++;
-            System.out.println("\n--- Rodada " + rodadaAtual + "/" + RODADAS_POR_BATALHA + " ---");
+            rodadaNestaBatalha++;
+            System.out.println("\n--- Rodada " + rodadaNestaBatalha + "/" + RODADAS_POR_BATALHA + " ---");
 
             Round round = new Round(perguntas.get(indice), player, enemy);
             round.executar();
@@ -50,7 +56,6 @@ public class BattleManager {
             System.out.println("Você foi derrotado por " + enemy.getNome() + "...");
             return false;
         } else {
-
             boolean playerVenceu = player.getPersonagem().getVidaAtual() > enemy.getPersonagem().getVidaAtual();
             if (playerVenceu) {
                 System.out.println("Tempo esgotado! Você venceu por ter mais vida!");

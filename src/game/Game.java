@@ -42,21 +42,22 @@ public class Game {
 
     private void iniciarSequencia() {
         Enemy[] oponentes = {
-                new Enemy("Aluno Curioso",    new EstudanteEquilibrado("Aluno Curioso")),
-                new Enemy("Nerd da turma", new EstudanteEspecialista("Nerd da turma")),
-                new Enemy("Aluno nota 10",    new EstudanteEspecialista("Aluno nota 10"))
+                new Enemy("Aluno Curioso",  new EstudanteEquilibrado("Aluno Curioso")),
+                new Enemy("Nerd da turma",  new EstudanteEspecialista("Nerd da turma")),
+                new Enemy("Aluno nota 10",  new EstudanteEspecialista("Aluno nota 10"))
         };
+
+        BattleManager batalha = new BattleManager(player, banco);
 
         int vitorias = 0;
 
         for (Enemy oponente : oponentes) {
-            // Recupera um pouco de vida entre batalhas
             if (vitorias > 0) {
                 player.getPersonagem().recuperarVida(20);
                 System.out.println("\nVocê recuperou 20 de vida antes da próxima batalha!");
             }
 
-            BattleManager batalha = new BattleManager(player, oponente, banco);
+            batalha.setOponente(oponente);
             boolean venceu = batalha.executarBatalha();
 
             if (!venceu) {
