@@ -18,6 +18,12 @@ public class ConsoleUI {
         enemy.getPersonagem().exibirStatus();
     }
 
+    public static void exibirMensagemSuper(String nomeSuper) {
+        System.out.println("\n╔══════════════════════════════════════╗");
+        System.out.println("║  ★ SUPER ATIVADO: " + String.format("%-19s", nomeSuper) + "║");
+        System.out.println("╚══════════════════════════════════════╝");
+    }
+
     public static String lerResposta() {
         return scanner.nextLine().trim();
     }
