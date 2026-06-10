@@ -17,6 +17,8 @@ public abstract class Question {
 
     public abstract boolean verificarResposta(String resposta);
 
+    public abstract String getDica();
+
     public int getDificuldade() {
         return dificuldade;
     }
@@ -29,4 +31,3 @@ public abstract class Question {
         return categoria;
     }
 }
-
