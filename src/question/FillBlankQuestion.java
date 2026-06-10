@@ -17,4 +17,12 @@ public class FillBlankQuestion extends Question {
     public boolean verificarResposta(String resposta) {
         return resposta.trim().equalsIgnoreCase(respostaCorreta.trim());
     }
+
+    @Override
+    public String getDica() {
+        String dica = respostaCorreta.length() >= 3
+                ? respostaCorreta.substring(0, 3)
+                : respostaCorreta;
+        return "\n[COLA MENTAL] A resposta começa com: \"" + dica + "...\"";
+    }
 }
