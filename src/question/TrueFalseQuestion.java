@@ -19,5 +19,12 @@ public class TrueFalseQuestion extends Question {
     public boolean verificarResposta(String resposta) {
         return resposta.trim().equalsIgnoreCase(respostaCorreta);
     }
+
+    @Override
+    public String getDica() {
+        String porExtenso = respostaCorreta.equalsIgnoreCase("V") ? "Verdadeiro" : "Falso";
+        String dica = porExtenso.substring(0, 3);
+        return "\n[COLA MENTAL] A resposta começa com: \"" + dica + "...\"";
+    }
 }
 
