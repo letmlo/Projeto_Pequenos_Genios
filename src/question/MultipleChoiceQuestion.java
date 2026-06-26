@@ -38,7 +38,6 @@ public class MultipleChoiceQuestion extends Question {
             if (i != indiceCorreto) errados.add(i);
         }
         Collections.shuffle(errados);
-
         List<Integer> eliminados = errados.subList(0, Math.min(2, errados.size()));
 
         StringBuilder sb = new StringBuilder();
@@ -55,7 +54,5 @@ public class MultipleChoiceQuestion extends Question {
         return sb.toString();
     }
 
-    public List<String> getAlternativas() {
-        return alternativas;
-    }
+    public List<String> getAlternativas() { return alternativas; }
 }
