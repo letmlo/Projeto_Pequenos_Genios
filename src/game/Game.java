@@ -13,8 +13,7 @@ public class Game {
     private QuestionBank banco;
 
     public void iniciar() {
-        System.out.println("\nBem-vindo ao Pequenos Gênios!");
-
+        ConsoleUI.exibirTitulo();
         configurarJogador();
         iniciarSequencia();
     }
@@ -25,10 +24,13 @@ public class Game {
         System.out.println("\nEscolha seu personagem:");
         System.out.println("1) Estudante Equilibrado (HP: 100 | ATK: 15 | DEF: 5)");
         System.out.println("   " + new EstudanteEquilibrado("").getDescricao());
+        System.out.println("   Super: Cola Mental — " + new EstudanteEquilibrado("").getDescricaoSuper());
+        System.out.println();
         System.out.println("2) Estudante Especialista (HP: 80  | ATK: 25 | DEF: 2)");
         System.out.println("   " + new EstudanteEspecialista("").getDescricao());
+        System.out.println("   Super: Domínio Absoluto — " + new EstudanteEspecialista("").getDescricaoSuper());
 
-        int escolha = ConsoleUI.lerOpcao("Sua escolha (1 ou 2): ", 1, 2);
+        int escolha = ConsoleUI.lerOpcao("\nSua escolha (1 ou 2): ", 1, 2);
 
         Character personagem = escolha == 1
                 ? new EstudanteEquilibrado(nome)
@@ -42,44 +44,67 @@ public class Game {
 
     private void iniciarSequencia() {
         Enemy[] oponentes = {
-                new Enemy("Aluno Curioso",  new EstudanteEquilibrado("Aluno Curioso")),
-                new Enemy("Nerd da turma",  new EstudanteEspecialista("Nerd da turma")),
-                new Enemy("Aluno nota 10",  new EstudanteEspecialista("Aluno nota 10"))
+                new Enemy("Aluno Kumon",    new EstudanteEquilibrado("Aluno Kumon")    {{ vidaMaxima = 80; vidaAtual = 80; defesa = 3; }}),
+                new Enemy("Calouro do IME", new EstudanteEspecialista("Calouro do IME") {{ vidaMaxima = 60; vidaAtual = 60; defesa = 1; }}),
+                new Enemy("Luciano Huck",  new Boss("Luciano Huck", 200, 35, 5))
         };
 
-        BattleManager batalha = new BattleManager(player, banco);
+        int[] dificuldades = {1, 2, 3};
 
+        BattleManager batalha = new BattleManager(player, banco);
         int vitorias = 0;
 
-        for (Enemy oponente : oponentes) {
+        for (int i = 0; i < oponentes.length; i++) {
             if (vitorias > 0) {
                 player.getPersonagem().recuperarVida(20);
-                System.out.println("\nVocê recuperou 20 de vida antes da próxima batalha!");
+                System.out.println("\n Você recuperou 20 de vida antes da próxima batalha!");
             }
 
-            batalha.setOponente(oponente);
+            batalha.setOponente(oponentes[i]);
+            batalha.setDificuldade(dificuldades[i]);
+
             boolean venceu = batalha.executarBatalha();
 
             if (!venceu) {
-                exibirDerrota();
+                exibirDerrota(batalha, vitorias);
                 return;
             }
             vitorias++;
         }
 
-        exibirVitoria();
+        exibirVitoria(batalha, vitorias);
     }
 
-    private void exibirVitoria() {
+    private void exibirVitoria(BattleManager batalha, int vitorias) {
         ConsoleUI.exibirSeparador();
-        System.out.println("\nPARABÉNS! VOCÊ É O PEQUENO GÊNIO!");
-        System.out.println("Pontuação final: " + player.getPontuacao() + " pontos");
-        System.out.println("Obrigado por jogar Pequenos Gênios!");
+        System.out.println("\n╔══════════════════════════════════════╗");
+        System.out.println("║   PARABÉNS! VOCÊ É O PEQUENO GÊNIO!  ║");
+        System.out.println("╚══════════════════════════════════════╝");
+        exibirEstatisticas(batalha, vitorias);
     }
 
-    private void exibirDerrota() {
+    private void exibirDerrota(BattleManager batalha, int vitorias) {
         ConsoleUI.exibirSeparador();
-        System.out.println("\nFim de jogo! Estude mais e tente novamente!");
-        System.out.println("Pontuação final: " + player.getPontuacao() + " pontos");
+        System.out.println("\n╔══════════════════════════════════════╗");
+        System.out.println("║         FIM DE JOGO!                 ║");
+        System.out.println("╚══════════════════════════════════════╝");
+        System.out.println("Estude mais e tente novamente!");
+        exibirEstatisticas(batalha, vitorias);
+    }
+
+    private void exibirEstatisticas(BattleManager batalha, int vitorias) {
+        int acertos = batalha.getTotalAcertos();
+        int erros   = batalha.getTotalErros();
+        int total   = acertos + erros;
+        int taxa    = total > 0 ? (acertos * 100 / total) : 0;
+
+        System.out.println("\n──────── ESTATÍSTICAS FINAIS ────────");
+        System.out.printf("  Batalhas vencidas : %d / 3%n", vitorias);
+        System.out.printf("  Respostas certas  : %d%n", acertos);
+        System.out.printf("  Respostas erradas : %d%n", erros);
+        System.out.printf("  Taxa de acerto    : %d%%%n", taxa);
+        System.out.printf("  Pontuação final   : %d pontos%n", player.getPontuacao());
+        System.out.println("─────────────────────────────────────");
+        System.out.println("\nObrigado por jogar Pequenos Gênios!");
     }
 }
