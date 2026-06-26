@@ -8,6 +8,13 @@ import java.util.Scanner;
 public class ConsoleUI {
     private static final Scanner scanner = new Scanner(System.in);
 
+    public static void exibirTitulo() {
+        System.out.println("\n╔══════════════════════════════════════╗");
+        System.out.println("║          PEQUENOS GÊNIOS             ║");
+        System.out.println("║ Prove que você é o mais inteligente! ║");
+        System.out.println("╚══════════════════════════════════════╝");
+    }
+
     public static void exibirSeparador() {
         System.out.println("\n──────────────────────────────────────");
     }
@@ -22,6 +29,10 @@ public class ConsoleUI {
         System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║  ★ SUPER ATIVADO: " + String.format("%-19s", nomeSuper) + "║");
         System.out.println("╚══════════════════════════════════════╝");
+    }
+
+    public static void exibirRespostaCorreta(String resposta) {
+        System.out.println("  ➜ Resposta correta era: " + resposta);
     }
 
     public static String lerResposta() {
