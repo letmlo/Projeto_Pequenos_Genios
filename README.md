@@ -2,7 +2,7 @@
 
 
 
-[](C:\Users\thays\Downloads\pro jogo\NERD.jfif)
+FOTO DO EMOJI DE NERDZINHO AQUI N TO CONSEGUINDO BOTAR
 
 
 
