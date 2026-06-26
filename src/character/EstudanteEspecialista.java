@@ -12,10 +12,12 @@ public class EstudanteEspecialista extends Character {
     public boolean usarSuper() {
         if (!superDisponivel) return false;
         superDisponivel = false;
+        acertosAposUso = 0;
         dominioAtivo = true;
         return true;
     }
 
+    /** consome o domínio e retorna se estava ativo. */
     public boolean consumirDominio() {
         if (dominioAtivo) {
             dominioAtivo = false;
@@ -30,7 +32,8 @@ public class EstudanteEspecialista extends Character {
     public String getNomeSuper() { return "Domínio Absoluto"; }
 
     @Override
-    public String getDescricao() {
-        return "Especialista: alto poder de ataque, mas frágil na defesa.";
-    }
+    public String getDescricaoSuper() { return "O especialista domina completamente o assunto."; }
+
+    @Override
+    public String getDescricao() { return "Especialista: alto poder de ataque, mas frágil na defesa."; }
 }
