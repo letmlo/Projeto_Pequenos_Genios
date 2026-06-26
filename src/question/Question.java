@@ -1,6 +1,10 @@
 package question;
 
-public abstract class Question {
+/**
+ * Classe abstrata base para todas as perguntas.
+ * Implementa perguntavel!!!!!!
+ */
+public abstract class Question implements Perguntavel {
     protected String enunciado;
     protected String respostaCorreta;
     protected String categoria;
@@ -13,21 +17,10 @@ public abstract class Question {
         this.dificuldade = dificuldade;
     }
 
-    public abstract void exibir();
+    @Override
+    public int getDificuldade() { return dificuldade; }
 
-    public abstract boolean verificarResposta(String resposta);
-
-    public abstract String getDica();
-
-    public int getDificuldade() {
-        return dificuldade;
-    }
-
-    public String getEnunciado() {
-        return enunciado;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
+    public String getEnunciado()      { return enunciado; }
+    public String getCategoria()      { return categoria; }
+    public String getRespostaCorreta() { return respostaCorreta; }
 }
